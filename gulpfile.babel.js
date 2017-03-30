@@ -6,6 +6,7 @@ import autoprefixer from 'gulp-autoprefixer';
 import sourcemaps from 'gulp-sourcemaps';
 import browserSync from 'browser-sync';
 import plumber from 'gulp-plumber';
+import rename from 'gulp-rename';
 import babel from 'babelify';
 import browserify from 'browserify';
 import source from 'vinyl-source-stream';
@@ -78,6 +79,7 @@ gulp.task('styles', () => {
         .pipe(sourcemaps.init())
         .pipe(sass({ outputStyle: cssOutput() }).on('error', sass.logError))
         .pipe(autoprefixer())
+        .pipe(rename('main.css'))
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(sassPaths.dest))
 });
