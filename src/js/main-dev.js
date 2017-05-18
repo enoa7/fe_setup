@@ -9,10 +9,12 @@ Bootstrap.$ = $;
 require('../../node_modules/bootstrap-sass/assets/javascripts/bootstrap');
 
 /** Import components */
-import Navigation from './component/navigation';
+import Jumbotron from './component/jumbotron';
 
 $(function() {
     console.log('Hammer time!');
 
-    new Navigation();
+    let jumbo = new Jumbotron();
+    $('body').append(jumbo.render());
+
 });

@@ -81,7 +81,7 @@ gulp.task('styles', () => {
         .pipe(autoprefixer())
         .pipe(rename('main.css'))
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(sassPaths.dest))
+        .pipe(gulp.dest(sassPaths.dest));
 });
 
 // new js task to compile es6
@@ -95,25 +95,14 @@ gulp.task('scripts', () => {
         .pipe(sourcemaps.init('loadMaps: true'))
         .pipe(jsOutput())
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(jsPaths.dest))
-        .pipe(reloadBrowserSync);
+        .pipe(gulp.dest(jsPaths.dest));
 });
 
 // watch css and js changes
 gulp.task('watch', () => {
-    gulp.watch('src/scss/**/*.scss', ['styles']);
-    gulp.watch('src/js/**/*.sj', ['scripts']);
+    gulp.watch('**/*.scss', { cwd: './src/sass' }, ['styles']);
+    gulp.watch('**/*.js', { cwd: './src/js' }, ['scripts']);
 });
-
 gulp.task('default', ['styles', 'scripts', 'watch'], () => {});
 
 gulp.task('serve', ['styles', 'scripts', 'watch', 'localServer'], () => {});
-
-/** 
- * gulp tasks for prod 
- **/
-
-gulp.task('prod', ['styles'], () => {
-    return gulp.src('./build/styles/*')
-        .pipe(gulp.dest(dirs.prod));
-});
